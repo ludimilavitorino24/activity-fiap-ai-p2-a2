@@ -25,6 +25,10 @@ To install and run the application, follow these steps:
     python3 -m venv .venv
     source .venv/bin/activate  # On Windows use `.venv\Scripts\activate`
     ```
+4. **Install the dependencies**:
+    ```sh
+    pip install -r requirements.txt
+    ```
 
 ### Usage
 
