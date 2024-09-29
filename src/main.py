@@ -1,21 +1,7 @@
-from perlin_noise import PerlinNoise
+from data_simulation.main import generate_cow_temp_data
+import report_generation.main
+import alert_processing.main
 
-# Simulate cow natural temperature data variation with anomalies
+data = generate_cow_temp_data() 
+print(data)
 
-noise = PerlinNoise(octaves=4, seed=1)
-
-min_temp = 37.5
-max_temp = 39.3
-normal_anomaly_chance = 0.1  # Chance of a normal anomaly occurring
-
-for y in range(100):
-    # Generate base temperature using Perlin noise
-    temp = min_temp + (max_temp - min_temp) * noise([y / 10])
-    
-    # Round the temperature
-    temp = round(temp, 2)
-    
-    # Round the temperature again after applying the anomaly
-    temp = round(temp, 2)
-    
-    print(temp)
