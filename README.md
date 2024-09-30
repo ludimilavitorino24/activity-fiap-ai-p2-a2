@@ -52,3 +52,15 @@ Run the following command:
 ```sh
 python src/main.py
 ```
+
+### Querying
+
+The script, `db_example.py`, demonstrates how to query data from a database, such as animals.
+
+To run this script, follow these steps:
+
+1. Execute the script by running the command `python src/db_example.py`.
+2. The script will connect to the database and retrieve animal data based on the provided query.
+3. The queried animal data will be displayed in the console.
+
+Note: This script can be used as a reference for querying any type of data from a database.

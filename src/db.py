@@ -64,6 +64,8 @@ class Animal(Base):
     breed = relationship('Breed', back_populates='animals')
     collars = relationship('AnimalCollar', back_populates='animal')
 
+    __str__ = lambda self: f'{self.name} ({self.tag_id})'
+
 
 # t_wc_collars table
 class Collar(Base):
