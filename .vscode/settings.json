@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "p2a2",
+            "group": "fiap-ai",
+            "database": "p2a2",
+            "username": "root"
+        }
+    ]
+}

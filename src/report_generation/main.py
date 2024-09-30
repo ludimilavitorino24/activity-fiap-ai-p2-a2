@@ -1,1 +1,1 @@
-print("Hello Report Generation")
+print("Module loaded: report_generation.main")

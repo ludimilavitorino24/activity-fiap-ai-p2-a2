@@ -2,11 +2,12 @@
 
 ## User Guide
 
-### Requirements
+### Requirements and dependencies
 
 To use this project effectively, you need:
 
 - **Python 3.x**: Ensure Python 3 is installed on your system.
+- **Docker**: Ensure Docker is installed on your system.
 
 ### Installation
 
@@ -28,6 +29,20 @@ To install and run the application, follow these steps:
 4. **Install the dependencies**:
     ```sh
     pip install -r requirements.txt
+    ```
+5. **Set environment variables**:
+    ```sh
+    cp .env.example .env
+    ```
+    Edit the `.env` file and set the environment variables as needed.
+
+6. **Run Postgers server using Docker Container**
+    ```sh
+    docker compose up -d
+    ```
+6. **Populate initial database**:
+    ```sh
+    python3 src/populate_db.py
     ```
 
 ### Usage
