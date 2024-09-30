@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16.0
+    container_name: p2a2-pg
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: p2a2
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: my_password
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data

@@ -1,1 +1,1 @@
-print("Hello world")
+print("Module loaded: alert_processing.main")

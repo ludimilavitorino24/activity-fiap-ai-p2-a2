@@ -1,5 +1,7 @@
 from perlin_noise import PerlinNoise
 
+print("Module loaded: data_simulation.main")
+
 # Simulate cow natural temperature data variation with anomalies
 
 noise = PerlinNoise(octaves=4, seed=1)
