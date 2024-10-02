@@ -121,6 +121,7 @@ def fetch_data(analysis_date: str = datetime.now().strftime("%d-%m-%Y")):
             ].sum()
 
             data[species_name][breed_name] = {
+                "count": breed_group["id_animal"].nunique(),
                 "mean_temperature": round(float(breed_group["temperature"].mean()), 2),
                 "max_temperature": round(float(breed_group["temperature"].max()), 2),
                 "min_temperature": round(float(breed_group["temperature"].min()), 2),
