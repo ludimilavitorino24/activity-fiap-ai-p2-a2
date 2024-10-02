@@ -8,4 +8,4 @@ from report_generation.fetch_data import fetch_data
 
 if __name__ == "__main__":
     result = fetch_data()
-    print("result", result)
+    print("Data for report:", result)
