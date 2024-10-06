@@ -24,7 +24,7 @@ def map_range(value, start1, stop1, start2, stop2):
     return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1))
 
 def next_geo2d(i, interval):
-    d = map_range(interval, 5, 10, 1000, 100)
+    d = map_range(interval, 5, 10, 10_000_000, 1_000_000)
 
     lat = map_range(noiseX([i / d]), -1, 1, -90, 90)
     lon = map_range(noiseZ([i / d]), -1, 1, -180, 180)
