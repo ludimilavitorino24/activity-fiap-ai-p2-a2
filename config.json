@@ -1,7 +1,7 @@
 {
     "simulation": {
-        "animalNumber": 2,
+        "animalNumber": 100,
         "interval": 5,
-        "iterations": 4
+        "iterations": 10
     }
 }
