@@ -1,11 +1,15 @@
 import dotenv
+
 dotenv.load_dotenv()
 
-import data_simulation.main
-import report_generation.main
-import alert_processing.main
-from report_generation.fetch_data import fetch_data
+from alert_processing.process_alerts import process_alerts
+
+# from report_generation.fetch_data import fetch_data
 
 if __name__ == "__main__":
-    result = fetch_data("01-10-2024")
-    print("Data for report:", result)
+    result = process_alerts("01-10-2024")
+    print(result)
+    assert False
+    # print("Data for report:", result)
+    # result = fetch_data("01-10-2024")
+    # print(result)
