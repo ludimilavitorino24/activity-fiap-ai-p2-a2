@@ -91,22 +91,43 @@ def fetch_data(analysis_date: str = datetime.now().strftime("%d-%m-%Y")):
         ],
     )
 
-    df["delta_distance_meters"] = df.apply(
-        lambda row: (
-            calculate_distance_meters(
-                float(row["latitude"]),
-                float(row["longitude"]),
-                float(df["latitude"].shift(1).loc[row.name]),
-                float(df["longitude"].shift(1).loc[row.name]),
-            )
-            if row.name > 0
-            else 0
-        ),
-        axis=1,
+    df = df.sort_values(by=["id_animal", "created_at"])
+
+    def calculate_total_distance_animal(animal_df: pd.DataFrame):
+        total_distance = 0
+        for i in range(1, len(animal_df)):
+            lat1 = animal_df.iloc[i - 1]["latitude"]
+            lon1 = animal_df.iloc[i - 1]["longitude"]
+            lat2 = animal_df.iloc[i]["latitude"]
+            lon2 = animal_df.iloc[i]["longitude"]
+            total_distance += calculate_distance_meters(lat1, lon1, lat2, lon2)
+        return total_distance
+
+    df["animal_distance_traveled"] = 0.0
+
+    for animal_id, animal_df in df.groupby("id_animal"):
+        distances = [0.0]
+        for i in range(1, len(animal_df)):
+            lat1 = animal_df.iloc[i - 1]["latitude"]
+            lon1 = animal_df.iloc[i - 1]["longitude"]
+            lat2 = animal_df.iloc[i]["latitude"]
+            lon2 = animal_df.iloc[i]["longitude"]
+            distance = calculate_distance_meters(lat1, lon1, lat2, lon2)
+            distances.append(distance)
+        df.loc[animal_df.index, "animal_distance_traveled"] = distances
+
+    animal_distance_traveled = df.groupby("id_animal").apply(
+        calculate_total_distance_animal
     )
 
-    animal_distance_traveled = df.groupby("id_animal")["delta_distance_meters"].sum()
+    df["total_animal_distance_traveled"] = df["id_animal"].map(animal_distance_traveled)
 
+    
+    with pd.option_context("display.max_columns", None, "display.max_rows", None):
+        print("Calculating distance traveled by each animal")
+        print(df.iloc[280:300])
+    assert False
+    
     data = {}
 
     for species_id, species_group in df.groupby("id_species"):
@@ -117,7 +138,7 @@ def fetch_data(analysis_date: str = datetime.now().strftime("%d-%m-%Y")):
             breed_name = breed_group["breed_name"].iloc[0]
 
             animal_distance_traveled = breed_group.groupby("id_animal")[
-                "delta_distance_meters"
+                "total_animal_distance_traveled"
             ].sum()
 
             data[species_name][breed_name] = {
