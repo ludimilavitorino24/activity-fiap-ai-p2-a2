@@ -10,3 +10,4 @@ six==1.16.0
 SQLAlchemy==2.0.35
 typing_extensions==4.12.2
 tzdata==2024.2
+oracledb==2.4.1
