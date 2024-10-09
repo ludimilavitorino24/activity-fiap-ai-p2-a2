@@ -116,18 +116,18 @@ def fetch_data(analysis_date: str = datetime.now().strftime("%d-%m-%Y")):
             distances.append(distance)
         df.loc[animal_df.index, "animal_distance_traveled"] = distances
 
-    animal_distance_traveled = df.groupby("id_animal").apply(
+    animal_distances_traveled = df.groupby("id_animal").apply(
         calculate_total_distance_animal
     )
 
-    df["total_animal_distance_traveled"] = df["id_animal"].map(animal_distance_traveled)
+    df["total_animal_distance_traveled"] = df["id_animal"].map(
+        animal_distances_traveled
+    )
 
-    
-    with pd.option_context("display.max_columns", None, "display.max_rows", None):
-        print("Calculating distance traveled by each animal")
-        print(df.iloc[280:300])
-    assert False
-    
+    # with pd.option_context("display.max_columns", None, "display.max_rows", None):
+    #     print("Calculating distance traveled by each animal")
+    #     print(df.iloc[280:300])
+
     data = {}
 
     for species_id, species_group in df.groupby("id_species"):
@@ -137,9 +137,9 @@ def fetch_data(analysis_date: str = datetime.now().strftime("%d-%m-%Y")):
         for breed_id, breed_group in species_group.groupby("id_breed"):
             breed_name = breed_group["breed_name"].iloc[0]
 
-            animal_distance_traveled = breed_group.groupby("id_animal")[
-                "total_animal_distance_traveled"
-            ].sum()
+            animal_distances_traveled = breed_group.groupby("id_animal").agg(
+                {"total_animal_distance_traveled": "first"}
+            )
 
             data[species_name][breed_name] = {
                 "count": breed_group["id_animal"].nunique(),
@@ -150,16 +150,16 @@ def fetch_data(analysis_date: str = datetime.now().strftime("%d-%m-%Y")):
                 "max_heartrate": round(float(breed_group["heartrate"].max()), 2),
                 "min_heartrate": round(float(breed_group["heartrate"].min()), 2),
                 "total_distance_traveled_meters": round(
-                    float(animal_distance_traveled.sum()), 2
+                    float(animal_distances_traveled.sum()), 2
                 ),
                 "mean_distance_traveled_meters": round(
-                    float(animal_distance_traveled.mean()), 2
+                    float(animal_distances_traveled.mean()), 2
                 ),
                 "max_distance_traveled_meters": round(
-                    float(animal_distance_traveled.max()), 2
+                    float(animal_distances_traveled.max()), 2
                 ),
                 "min_distance_traveled_meters": round(
-                    float(animal_distance_traveled.min()), 2
+                    float(animal_distances_traveled.min()), 2
                 ),
             }
 
