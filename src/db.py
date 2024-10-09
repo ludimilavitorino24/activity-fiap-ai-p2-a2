@@ -111,7 +111,6 @@ class DataLog(Base):
     longitude = Column(Numeric)
     created_at = Column(TIMESTAMP, nullable=False, server_default=func.now())
     updated_at = Column(TIMESTAMP, nullable=True, server_default=func.now())
-    is_outlier = Column(Boolean, nullable=True, default=False)
 
     animal_collar = relationship('AnimalCollar', back_populates='datalog')
 

@@ -20,13 +20,13 @@ def populate_db():
             name="Cow"
         )
         session.add(new_species)
-        # session.commit()
 
         new_breed = Breed(
             name="Holstein"
         )
         session.add(new_breed)
-        # session.commit()
+
+        session.commit()
 
         #endregion
 
@@ -39,42 +39,38 @@ def populate_db():
                 id_breed=new_breed.id_breed
             )
             session.add(new_animal)
-            # session.commit()
+            session.commit()
 
             new_collar = Collar()
             session.add(new_collar)
-            # session.commit()
+            session.commit()
 
             new_animal_collar = AnimalCollar(
                 id_collar=new_collar.id_collar,
                 id_animal=new_animal.id_animal
             )
             session.add(new_animal_collar)
-            # session.commit()
+            session.commit()
             
-        #     for j in range(iterations):
-        #         temp = next_temp((i + 1) * (j + 1))
-        #         heartrate = next_heartrate((i + 1) * (j + 1))
-        #         lat, lon = next_geo2d((i + 1) * (j + 1), interval)
+            for j in range(iterations):
+                temp = next_temp((i + 1) * (j + 1))
+                heartrate = next_heartrate((i + 1) * (j + 1))
+                lat, lon = next_geo2d((i + 1) * (j + 1), interval)
 
-        #         startingTime = datetime.now().timestamp()
+                startingTime = datetime.now().timestamp()
 
-        #         intervalInSecs = (interval * 60) * j
-        #         startingTime += intervalInSecs
+                intervalInSecs = (interval * 60) * j
+                startingTime += intervalInSecs
 
-        #         dt_object = datetime.fromtimestamp(startingTime)
-        #         formatted_time = dt_object.strftime('%Y-%m-%d %H:%M:%S')
-
-        #         new_datalog = DataLog(
-        #             id_animal_collar=new_animal_collar.id_animal_collar,
-        #             temperature=temp,
-        #             heartrate=heartrate,
-        #             latitude=lat,
-        #             longitude=lon,
-        #             created_at=formatted_time
-        #         )
-        #         session.add(new_datalog)
-        #         # session.commit()
+                new_datalog = DataLog(
+                    id_animal_collar=new_animal_collar.id_animal_collar,
+                    temperature=temp,
+                    heartrate=heartrate,
+                    latitude=lat,
+                    longitude=lon,
+                    created_at=datetime.fromtimestamp(startingTime)
+                )
+                session.add(new_datalog)
 
         print("Farm populated successfully with:")
         print("1 species,")
