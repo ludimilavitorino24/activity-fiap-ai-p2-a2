@@ -1,3 +1,5 @@
 from typing import Literal
 
-AlertType = Literal['temperature', 'heartrate', 'movement']
+AlertMetric = Literal['temperature', 'heartrate', 'movement']
+
+OutlierAlertType = Literal['z_score_outlier_above', 'z_score_outlier_below']

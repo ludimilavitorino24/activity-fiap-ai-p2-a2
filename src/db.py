@@ -121,7 +121,8 @@ class Alert(Base):
     id_animal_collar = Column(Integer, ForeignKey('t_wc_animals_collars.id_animal_collar'), nullable=False)
     id_animal = Column(Integer, ForeignKey('t_wc_animals.id_animal'), nullable=False)
     id_data_log = Column(Integer, ForeignKey('t_wc_datalog.id_datalog'), nullable=False)
-    alert_type = Column(String(50), nullable=False)  # e.g., 'temperature', 'heartrate', 'movement'
+    alert_metric = Column(String(50), nullable=False)  # e.g., 'temperature', 'heartrate', 'movement'
+    alert_type = Column(String(50), nullable=False)  # e.g. 'z_score_outlier_above', 'z_score_outlier_below'
     created_at = Column(TIMESTAMP, nullable=False, server_default=func.now())
 
     animal_collar = relationship('AnimalCollar')
