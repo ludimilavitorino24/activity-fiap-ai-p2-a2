@@ -20,12 +20,12 @@ def populate_db():
             name="Cow"
         )
         session.add(new_species)
-        session.commit()
 
         new_breed = Breed(
             name="Holstein"
         )
         session.add(new_breed)
+
         session.commit()
 
         #endregion
@@ -62,19 +62,15 @@ def populate_db():
                 intervalInSecs = (interval * 60) * j
                 startingTime += intervalInSecs
 
-                dt_object = datetime.fromtimestamp(startingTime)
-                formatted_time = dt_object.strftime('%Y-%m-%d %H:%M:%S')
-
                 new_datalog = DataLog(
                     id_animal_collar=new_animal_collar.id_animal_collar,
                     temperature=temp,
                     heartrate=heartrate,
                     latitude=lat,
                     longitude=lon,
-                    created_at=formatted_time
+                    created_at=datetime.fromtimestamp(startingTime)
                 )
                 session.add(new_datalog)
-                session.commit()
 
         print("Farm populated successfully with:")
         print("1 species,")
@@ -88,6 +84,7 @@ def populate_db():
         session.rollback()
         print(f"Error: {e}")
     finally:
+        session.commit()
         session.close()
 
 if __name__ == "__main__":
