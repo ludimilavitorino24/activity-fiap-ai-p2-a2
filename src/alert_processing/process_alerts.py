@@ -47,35 +47,28 @@ def process_outliers(data, field_name: str, threshold: float = 1.7):
     data_outliers_above["alert_type"] = "z_score_outlier_above"
     data_outliers_below["alert_type"] = "z_score_outlier_below"
 
-    data_outliers = pd.concat(
-        [data_outliers_above, data_outliers_below]
-    ).sort_index()
+    data_outliers = pd.concat([data_outliers_above, data_outliers_below]).sort_index()
 
     return getALertDict(data_outliers)
-
-
-def process_heartrate(data):
-    return data
-
-
-def process_movement(data):
-    return data
 
 
 def process_alerts(day: str):
     data = fetch_data(day)
 
-    temperature_alerts = process_outliers(data, "temperature")
+    temperature_alerts = process_outliers(data, "temperature", threshold=1.75)
+    print(len(temperature_alerts))
 
     # for alert in temperature_alerts:
     #     save_alert(**alert)
 
-    heart_rate_alerts = process_heartrate(data, "heartrate")
+    heart_rate_alerts = process_outliers(data, "heartrate", threshold=1.697)
+    print(len(heart_rate_alerts))
 
     # for alert in heart_rate_alerts:
     #     save_alert(**alert)
 
-    movement_alerts = process_movement(data, "animal_distance_traveled")
+    movement_alerts = process_outliers(data, "animal_distance_traveled", threshold=2.2)
+    print(len(movement_alerts))
 
     # for alert in movement_alerts:
     #     save_alert(**alert)
