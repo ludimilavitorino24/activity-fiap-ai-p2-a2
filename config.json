@@ -1,7 +1,10 @@
 {
     "simulation": {
-        "animalNumber": 100,
+        "animalNumber": 2,
         "interval": 5,
-        "iterations": 10
+        "iterations": 4
+    },
+    "report": {
+        "outDir": "./reports/"
     }
 }
