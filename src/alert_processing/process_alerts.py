@@ -31,25 +31,27 @@ def getALertDict(alerts_df: pd.DataFrame) -> dict:
     return alerts
 
 
-def process_temperature(data, threshold: float = 1.7):
-    temperatures = data["temperature"]
-    temperatures_z = z_score(temperatures)
+def process_outliers(data, field_name: str, threshold: float = 1.7):
+    field_data = data[field_name]
+    field_z = z_score(field_data)
 
-    z_outliers_above_indices = temperatures_z >= threshold
-    z_outliers_below_indices = temperatures_z <= -threshold
+    z_outliers_above_indices = field_z >= threshold
+    z_outliers_below_indices = field_z <= -threshold
 
     data_outliers_above = data[z_outliers_above_indices].copy()
     data_outliers_below = data[z_outliers_below_indices].copy()
 
-    data_outliers_above["alert_metric"] = "temperature"
-    data_outliers_below["alert_metric"] = "temperature"
+    data_outliers_above["alert_metric"] = field_name
+    data_outliers_below["alert_metric"] = field_name
 
     data_outliers_above["alert_type"] = "z_score_outlier_above"
     data_outliers_below["alert_type"] = "z_score_outlier_below"
-    
-    data_temperature = pd.concat([data_outliers_above, data_outliers_below]).sort_index()
 
-    return getALertDict(data_temperature)
+    data_outliers = pd.concat(
+        [data_outliers_above, data_outliers_below]
+    ).sort_index()
+
+    return getALertDict(data_outliers)
 
 
 def process_heartrate(data):
@@ -63,17 +65,17 @@ def process_movement(data):
 def process_alerts(day: str):
     data = fetch_data(day)
 
-    temperature_alerts = process_temperature(data)
+    temperature_alerts = process_outliers(data, "temperature")
 
-    for alert in temperature_alerts:
-        save_alert(**alert)
+    # for alert in temperature_alerts:
+    #     save_alert(**alert)
 
-    # heart_rate_alerts = process_heartrate(data)
+    heart_rate_alerts = process_heartrate(data, "heartrate")
 
     # for alert in heart_rate_alerts:
-    #     save_alert("heartrate", id_animal_collar, id_animal, id_data_log)
+    #     save_alert(**alert)
 
-    # movement_alerts = process_movement(data)
+    movement_alerts = process_movement(data, "animal_distance_traveled")
 
     # for alert in movement_alerts:
-    #     save_alert("movement", id_animal_collar, id_animal, id_data_log)
+    #     save_alert(**alert)

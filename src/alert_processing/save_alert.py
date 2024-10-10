@@ -11,12 +11,6 @@ def save_alert(
     id_datalog: int,
 ) -> None:
     """Save the alert to the database."""
-    print("alert_type", alert_type)
-    print("alert_metric", alert_metric)
-    print("id_animal_collar", id_animal_collar)
-    print("id_animal", id_animal)
-    print("id_datalog", id_datalog)
-    assert False
     try:
         SessionLocal = sessionmaker(bind=engine)
         session = SessionLocal()
