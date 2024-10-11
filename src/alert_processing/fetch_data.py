@@ -97,8 +97,4 @@ def fetch_data(analysis_date: str = datetime.now().strftime("%d-%m-%Y")):
 
     df["total_animal_distance_traveled"] = df["id_animal"].map(animal_distance_traveled)
 
-    # with pd.option_context("display.max_columns", None, "display.max_rows", None):
-    #     print("Calculating distance traveled by each animal")
-    #     print(df.iloc[280:300])
-
     return df

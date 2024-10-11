@@ -56,19 +56,19 @@ def process_alerts(day: str):
     data = fetch_data(day)
 
     temperature_alerts = process_outliers(data, "temperature", threshold=1.75)
-    print(len(temperature_alerts))
+    print(f"Alertas de temperatura disparados: {len(temperature_alerts)}")
 
-    # for alert in temperature_alerts:
-    #     save_alert(**alert)
+    for alert in temperature_alerts:
+        save_alert(**alert)
 
     heart_rate_alerts = process_outliers(data, "heartrate", threshold=1.697)
-    print(len(heart_rate_alerts))
+    print(f"Alertas de batimentos cardíacos disparados: {len(heart_rate_alerts)}")
 
-    # for alert in heart_rate_alerts:
-    #     save_alert(**alert)
+    for alert in heart_rate_alerts:
+        save_alert(**alert)
 
     movement_alerts = process_outliers(data, "animal_distance_traveled", threshold=2.2)
-    print(len(movement_alerts))
+    print(f"Alertas de movimento disparados: {len(movement_alerts)}")
 
-    # for alert in movement_alerts:
-    #     save_alert(**alert)
+    for alert in movement_alerts:
+        save_alert(**alert)

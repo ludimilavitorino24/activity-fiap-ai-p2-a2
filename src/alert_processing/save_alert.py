@@ -15,10 +15,22 @@ def save_alert(
         SessionLocal = sessionmaker(bind=engine)
         session = SessionLocal()
 
+        existing_alert = (
+            session.query(Alert)
+            .filter_by(
+                id_datalog=id_datalog, alert_metric=alert_metric, alert_type=alert_type
+            )
+            .first()
+        )
+
+        if existing_alert:
+            print("Alert already exists, not saving.")
+            return
+
         new_alert = Alert(
-            id_animal_collar=id_animal_collar,
-            id_animal=id_animal,
-            id_data_log=id_datalog,
+            # id_animal_collar=id_animal_collar,
+            # id_animal=id_animal,
+            id_datalog=id_datalog,
             alert_type=alert_type,
             alert_metric=alert_metric,
         )

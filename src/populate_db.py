@@ -76,6 +76,8 @@ def populate_db():
                 session.add(new_datalog)
                 session.commit()
 
+        
+
         print("Farm populated successfully with:")
         print("1 species,")
         print("1 breed,")
@@ -83,6 +85,7 @@ def populate_db():
         print(f"{animalNumber} collars,")
         print(f"{animalNumber} animal-collar links.")
         print(f"{animalNumber * iterations} data logs.")
+        
         
     except Exception as e:
         session.rollback()
