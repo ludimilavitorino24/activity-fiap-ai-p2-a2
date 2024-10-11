@@ -22,7 +22,6 @@ def save_alert(
         )
 
         if existing_alert:
-            print("Alert already exists, not saving.")
             return
 
         new_alert = Alert(
