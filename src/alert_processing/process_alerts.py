@@ -21,8 +21,6 @@ def getALertDict(alerts_df: pd.DataFrame) -> dict:
         alerts.append(
             {
                 "id_datalog": row["id_datalog"],
-                "id_animal": row["id_animal"],
-                "id_animal_collar": row["id_animal_collar"],
                 "alert_metric": row["alert_metric"],
                 "alert_type": row["alert_type"],
             }

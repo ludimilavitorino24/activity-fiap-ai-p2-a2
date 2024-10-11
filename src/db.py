@@ -118,8 +118,6 @@ class Alert(Base):
     __tablename__ = 't_wc_alerts'
 
     id_alert = Column(Integer, primary_key=True, autoincrement=True)
-    # id_animal_collar = Column(Integer, ForeignKey('t_wc_animals_collars.id_animal_collar'), nullable=False)
-    # id_animal = Column(Integer, ForeignKey('t_wc_animals.id_animal'), nullable=False)
     id_datalog = Column(Integer, ForeignKey('t_wc_datalog.id_datalog'), nullable=False)
     alert_metric = Column(String(50), nullable=False)  # e.g., 'temperature', 'heartrate', 'movement'
     alert_type = Column(String(50), nullable=False)  # e.g. 'z_score_outlier_above', 'z_score_outlier_below'

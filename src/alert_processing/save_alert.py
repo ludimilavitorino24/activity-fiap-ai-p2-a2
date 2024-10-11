@@ -6,8 +6,6 @@ from typings import AlertMetric
 def save_alert(
     alert_metric: AlertMetric,
     alert_type: str,
-    id_animal_collar: int,
-    id_animal: int,
     id_datalog: int,
 ) -> None:
     """Save the alert to the database."""
@@ -28,8 +26,6 @@ def save_alert(
             return
 
         new_alert = Alert(
-            # id_animal_collar=id_animal_collar,
-            # id_animal=id_animal,
             id_datalog=id_datalog,
             alert_type=alert_type,
             alert_metric=alert_metric,
