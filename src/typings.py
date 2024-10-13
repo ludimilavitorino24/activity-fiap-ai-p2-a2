@@ -1,4 +1,8 @@
-from typing import List
+from typing import Literal, List
+
+AlertMetric = Literal['temperature', 'heartrate', 'movement']
+
+OutlierAlertType = Literal['z_score_outlier_above', 'z_score_outlier_below']
 
 class ReportData:
     def __init__(self, name: str, breed: str, total_quantity: int, average_temperature: float, 
