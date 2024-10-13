@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
 import dotenv
 dotenv.load_dotenv()
 
@@ -33,7 +37,7 @@ def populate_db():
         for i in range(animalNumber):
             animal_name = random.choice(cow_names_pt_br)
             new_animal = Animal(
-                tag_id=1,
+                tag_id=i,
                 name=animal_name + " " + str(i + 1),
                 id_species=new_species.id_species,
                 id_breed=new_breed.id_breed
@@ -72,8 +76,6 @@ def populate_db():
                 )
                 session.add(new_datalog)
 
-        
-
         print("Farm populated successfully with:")
         print("1 species,")
         print("1 breed,")
@@ -92,4 +94,3 @@ def populate_db():
 
 if __name__ == "__main__":
     populate_db()
-    #print("a")

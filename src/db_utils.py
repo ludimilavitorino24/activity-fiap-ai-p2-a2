@@ -35,8 +35,7 @@ def fetch_datalogs(
             cast(datalog.latitude as float) as latitude,
             cast(datalog.longitude as float) as longitude,
             datalog.created_at as created_at,
-            datalog.updated_at as updated_at,
-            datalog.is_outlier as is_outlier
+            datalog.updated_at as updated_at
         FROM t_wc_datalog datalog
         LEFT JOIN t_wc_animals_collars animal_collars ON datalog.id_animal_collar = animal_collars.id_animal_collar
         LEFT JOIN t_wc_animals animals ON animal_collars.id_animal = animals.id_animal
@@ -64,7 +63,6 @@ def fetch_datalogs(
             "longitude",
             "created_at",
             "updated_at",
-            "is_outlier",
         ],
     )
 

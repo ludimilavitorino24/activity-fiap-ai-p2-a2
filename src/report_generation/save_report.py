@@ -1,15 +1,16 @@
 from pathlib import Path
 from jinja2 import Template
 from typings import ReportData
-from config import reportOutDir
+from config import reportOutDir, templatePath
+from typing import List
 
-def save_report(date: str, data: ReportData):
+def save_report(date: str, data: List[ReportData]):
     """
     Save the report to a file.
 
     Args:
         date (str): The date of the report in the format 'YYYY-MM-DD'.
-        data (ReportData): The report data to be saved.
+        data (List[ReportData]): The data to include in the report.
 
     Returns:
         None
@@ -17,7 +18,7 @@ def save_report(date: str, data: ReportData):
     filename = f"daily_report_{date.replace('-', '')}.md"
     filepath = Path(reportOutDir) / filename
 
-    with open(Path('assets') / 'template.jinja2.md') as file_:
+    with open(templatePath) as file_:
         template = Template(file_.read())
 
         content = template.render(
