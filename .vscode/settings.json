@@ -8,7 +8,8 @@
             "name": "p2a2",
             "group": "fiap-ai",
             "database": "p2a2",
-            "username": "root"
+            "username": "root",
+            "password": "my_password"
         }
     ]
 }
