@@ -11,6 +11,7 @@ DEFAULT_CONFIG = {
     },
     "report": {
         "outDir": "./reports/",
+        "templatePath": "./config/template.jinja2.md"
     },
     "alerts": {
         "temperature_outlier_z_threshold": 3.2,
@@ -21,7 +22,7 @@ DEFAULT_CONFIG = {
 
 def saveDefaultConfig():
     try:
-        with open("config.json", "x") as f:
+        with open("config/config.json", "x") as f:
             f.write(json.dumps(DEFAULT_CONFIG, indent=4))
     except FileExistsError:
         pass
@@ -34,7 +35,7 @@ saveDefaultConfig()
 
 config = DEFAULT_CONFIG
 
-with open("config.json", "r") as f:
+with open("config/config.json", "r") as f:
     config = json.load(f)
 
 # endregion
@@ -45,6 +46,7 @@ animalNumber = config.get('simulation', {}).get('animalNumber', DEFAULT_CONFIG['
 interval = config.get('simulation', {}).get('interval', DEFAULT_CONFIG['simulation']['interval'])
 iterations = config.get('simulation', {}).get('iterations', DEFAULT_CONFIG['simulation']['iterations'])
 reportOutDir = config.get('report', {}).get('outDir', DEFAULT_CONFIG['report']['outDir'])
+templatePath = config.get('report', {}).get('templatePath', DEFAULT_CONFIG['report']['templatePath'])
 
 temperature_outlier_z_threshold = config.get("alerts", {}).get(
     "temperature_outlier_z_threshold",
