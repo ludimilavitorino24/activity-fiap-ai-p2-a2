@@ -9,6 +9,9 @@ DEFAULT_CONFIG = {
         "interval": 5,
         "iterations": 4
     },
+    "report": {
+        "outDir": "./reports/",
+    }
     "alerts": {
         "temperature_outlier_z_threshould": 3.2,
         "hearth_rate_outlier_z_threshould": 6.0,
@@ -19,7 +22,6 @@ DEFAULT_CONFIG = {
 def saveDefaultConfig():
     try:
         with open("config.json", "x") as f:
-            # beautify
             f.write(json.dumps(DEFAULT_CONFIG, indent=4))
     except FileExistsError:
         pass
@@ -42,6 +44,7 @@ with open("config.json", "r") as f:
 animalNumber = config.get('simulation', {}).get('animalNumber', DEFAULT_CONFIG['simulation']['animalNumber'])
 interval = config.get('simulation', {}).get('interval', DEFAULT_CONFIG['simulation']['interval'])
 iterations = config.get('simulation', {}).get('iterations', DEFAULT_CONFIG['simulation']['iterations'])
+reportOutDir = config.get('report', {}).get('outDir', DEFAULT_CONFIG['report']['outDir'])
 
 temperature_outlier_z_threshould = config.get("alerts", {}).get(
     "temperature_outlier_z_threshould",
