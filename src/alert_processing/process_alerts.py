@@ -5,9 +5,9 @@ from alert_processing.fetch_data import fetch_data
 from alert_processing.save_alert import save_alert
 
 from config import (
-    temperature_outlier_z_threshould,
-    hearth_rate_outlier_z_threshould,
-    movement_outlier_z_threshould,
+    temperature_outlier_z_threshold,
+    hearth_rate_outlier_z_threshold,
+    movement_outlier_z_threshold,
 )
 
 
@@ -62,7 +62,7 @@ def process_alerts(day: str):
     data = fetch_data(day)
 
     temperature_alerts = process_outliers(
-        data, "temperature", threshold=temperature_outlier_z_threshould
+        data, "temperature", threshold=temperature_outlier_z_threshold
     )
     print(f"Alertas de temperatura disparados: {len(temperature_alerts)}")
 
@@ -70,7 +70,7 @@ def process_alerts(day: str):
         save_alert(**alert)
 
     heart_rate_alerts = process_outliers(
-        data, "heartrate", threshold=hearth_rate_outlier_z_threshould
+        data, "heartrate", threshold=hearth_rate_outlier_z_threshold
     )
     print(f"Alertas de batimentos cardíacos disparados: {len(heart_rate_alerts)}")
 
@@ -78,7 +78,7 @@ def process_alerts(day: str):
         save_alert(**alert)
 
     movement_alerts = process_outliers(
-        data, "animal_distance_traveled", threshold=movement_outlier_z_threshould
+        data, "animal_distance_traveled", threshold=movement_outlier_z_threshold
     )
     print(f"Alertas de movimento disparados: {len(movement_alerts)}")
 

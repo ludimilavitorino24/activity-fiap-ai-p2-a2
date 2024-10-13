@@ -13,9 +13,9 @@ DEFAULT_CONFIG = {
         "outDir": "./reports/",
     },
     "alerts": {
-        "temperature_outlier_z_threshould": 3.2,
-        "hearth_rate_outlier_z_threshould": 6.0,
-        "movement_outlier_z_threshould": 1.7,
+        "temperature_outlier_z_threshold": 3.2,
+        "hearth_rate_outlier_z_threshold": 6.0,
+        "movement_outlier_z_threshold": 1.7,
     },
 }
 
@@ -46,17 +46,17 @@ interval = config.get('simulation', {}).get('interval', DEFAULT_CONFIG['simulati
 iterations = config.get('simulation', {}).get('iterations', DEFAULT_CONFIG['simulation']['iterations'])
 reportOutDir = config.get('report', {}).get('outDir', DEFAULT_CONFIG['report']['outDir'])
 
-temperature_outlier_z_threshould = config.get("alerts", {}).get(
-    "temperature_outlier_z_threshould",
-    DEFAULT_CONFIG["alerts"]["temperature_outlier_z_threshould"],
+temperature_outlier_z_threshold = config.get("alerts", {}).get(
+    "temperature_outlier_z_threshold",
+    DEFAULT_CONFIG["alerts"]["temperature_outlier_z_threshold"],
 )
-hearth_rate_outlier_z_threshould = config.get("alerts", {}).get(
-    "hearth_rate_outlier_z_threshould",
-    DEFAULT_CONFIG["alerts"]["hearth_rate_outlier_z_threshould"],
+hearth_rate_outlier_z_threshold = config.get("alerts", {}).get(
+    "hearth_rate_outlier_z_threshold",
+    DEFAULT_CONFIG["alerts"]["hearth_rate_outlier_z_threshold"],
 )
-movement_outlier_z_threshould = config.get("alerts", {}).get(
-    "movement_outlier_z_threshould",
-    DEFAULT_CONFIG["alerts"]["movement_outlier_z_threshould"],
+movement_outlier_z_threshold = config.get("alerts", {}).get(
+    "movement_outlier_z_threshold",
+    DEFAULT_CONFIG["alerts"]["movement_outlier_z_threshold"],
 )
 
 # endregion
