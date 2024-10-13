@@ -11,7 +11,7 @@ DEFAULT_CONFIG = {
     },
     "report": {
         "outDir": "./reports/",
-    }
+    },
     "alerts": {
         "temperature_outlier_z_threshould": 3.2,
         "hearth_rate_outlier_z_threshould": 6.0,
