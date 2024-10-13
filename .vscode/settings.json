@@ -1,4 +1,9 @@
 {
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/pgdata/": true,
+        ".venv": true,
+    },
     "sqltools.connections": [
         {
             "previewLimit": 50,
