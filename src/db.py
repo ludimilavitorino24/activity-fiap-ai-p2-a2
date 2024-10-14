@@ -114,6 +114,20 @@ class DataLog(Base):
 
     animal_collar = relationship('AnimalCollar', back_populates='datalog')
 
+# t_wc_alerts table
+class Alert(Base):
+    __tablename__ = 't_wc_alerts'
+
+    id_alert = Column(Integer, primary_key=True, autoincrement=True)
+    id_datalog = Column(Integer, ForeignKey(f'{SCHEMA}.t_wc_datalog.id_datalog'), nullable=False)
+    alert_metric = Column(String(50), nullable=False)  # e.g., 'temperature', 'heartrate', 'movement'
+    alert_type = Column(String(50), nullable=False)  # e.g. 'z_score_outlier_above', 'z_score_outlier_below'
+    created_at = Column(TIMESTAMP, nullable=False, server_default=func.now())
+
+    datalog = relationship('DataLog')
+    
+    __str__ = lambda self: f'Alert {self.alert_type} for Animal Collar {self.id_animal_collar}'
+
 #endregion
 
 # Create the table(s) in the database
