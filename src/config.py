@@ -1,5 +1,4 @@
 import json
-import os
 
 # region Default Config
 
@@ -12,6 +11,16 @@ DEFAULT_CONFIG = {
     "report": {
         "outDir": "./reports/",
         "templatePath": "./config/template.jinja2.md"
+    },
+    "outlier": {
+        "fever_trigger_pct": 0.083,
+        "hypothermia_trigger_pct": 0.083,
+        "min_temp": 37.5,
+        "max_temp": 39.3,
+        "tachycardia_trigger_pct": 0.022,
+        "bradycardia_trigger_pct": 0.022,
+        "min_heartrate": 60,
+        "max_heartrate": 80
     },
     "alerts": {
         "temperature_outlier_z_threshold": 3.2,
@@ -47,6 +56,15 @@ interval = config.get('simulation', {}).get('interval', DEFAULT_CONFIG['simulati
 iterations = config.get('simulation', {}).get('iterations', DEFAULT_CONFIG['simulation']['iterations'])
 reportOutDir = config.get('report', {}).get('outDir', DEFAULT_CONFIG['report']['outDir'])
 templatePath = config.get('report', {}).get('templatePath', DEFAULT_CONFIG['report']['templatePath'])
+
+fever_trigger_pct = config.get('simulation', {}).get('outlier', {}).get('fever_trigger_pct', 0.05)
+hypothermia_trigger_pct = config.get('simulation', {}).get('outlier', {}).get('hypothermia_trigger_pct', 0.05)
+min_temp = config.get('simulation', {}).get('outlier', {}).get('min_temp', 37.5)
+max_temp = config.get('simulation', {}).get('outlier', {}).get('max_temp', 39.3)
+tachycardia_trigger_pct = config.get('simulation', {}).get('outlier', {}).get('tachycardia_trigger_pct', 0.05)
+bradycardia_trigger_pct = config.get('simulation', {}).get('outlier', {}).get('bradycardia_trigger_pct', 0.05)
+min_heartrate = config.get('simulation', {}).get('outlier', {}).get('min_heartrate', 60)
+max_heartrate = config.get('simulation', {}).get('outlier', {}).get('max_heartrate', 80)
 
 temperature_outlier_z_threshold = config.get("alerts", {}).get(
     "temperature_outlier_z_threshold",

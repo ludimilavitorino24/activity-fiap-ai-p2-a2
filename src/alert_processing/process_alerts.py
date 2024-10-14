@@ -37,7 +37,6 @@ def getALertDict(alerts_df: pd.DataFrame) -> dict:
 
 
 def process_outliers(data, field_name: str, threshold: float):
-    print(f"threshold: {threshold}")
     field_data = data[field_name]
     field_z = z_score(field_data)
 

@@ -1,6 +1,7 @@
 from perlin_noise import PerlinNoise
 import random
 from utils import map_range
+from config import fever_trigger_pct, hypothermia_trigger_pct, min_temp, max_temp, max_heartrate, min_heartrate, tachycardia_trigger_pct, bradycardia_trigger_pct
 
 print("Module loaded: data_simulation.main")
 
@@ -8,25 +9,23 @@ noise = PerlinNoise(octaves=4, seed=1)
 noiseX = PerlinNoise(octaves=6)
 noiseZ = PerlinNoise(octaves=12)
 
-FEVER_TRIGGER_PCT = 0.083
-MIN_TEMP = 37.5
-MAX_TEMP = 39.3
-TACHYCARDIA_TRIGGER_PCT = 0.022
-MIN_HEARTRATE = 60
-MAX_HEARTRATE = 80
 
 def next_temp(i):    
-    if random.random() < FEVER_TRIGGER_PCT:  
-        temp = MAX_TEMP + random.uniform(1, 2.2)  
+    if random.random() < fever_trigger_pct:  
+        temp = max_temp + random.uniform(1, 2.2)
+    elif random.random() >= fever_trigger_pct and random.random() < fever_trigger_pct + hypothermia_trigger_pct:
+        temp = min_temp - random.uniform(0.5, 1.5)
     else:
-        temp = MIN_TEMP + (MAX_TEMP - MIN_TEMP) * noise([i / 10])
+        temp = min_temp + (max_temp - min_temp) * noise([i / 10])
     return round(temp, 2)
 
 def next_heartrate(i):
-    if random.random() < TACHYCARDIA_TRIGGER_PCT:
-        heartrate = MAX_HEARTRATE + random.uniform(5, 40)
+    if random.random() < tachycardia_trigger_pct:
+        heartrate = max_heartrate + random.uniform(5, 40)
+    elif random.random() >= tachycardia_trigger_pct and random.random() < tachycardia_trigger_pct + bradycardia_trigger_pct:
+        heartrate = min_heartrate - random.uniform(5, 20)
     else:
-        heartrate = MIN_HEARTRATE + (MAX_HEARTRATE - MIN_HEARTRATE) * noise([i / 10])
+        heartrate = min_heartrate + (max_heartrate - min_heartrate) * noise([i / 10])
     bpm = round(heartrate)
     return round(bpm, 2)
 

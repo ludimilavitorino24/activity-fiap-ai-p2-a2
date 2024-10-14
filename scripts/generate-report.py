@@ -4,7 +4,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'
 
 from db import engine, DataLog
 from sqlalchemy.orm import sessionmaker
-from alert_processing.process_alerts import process_alerts
 from report_generation.save_report import save_report
 from datetime import datetime
 from report_generation.analyze_data import analyze_data, dataPerSpecies
