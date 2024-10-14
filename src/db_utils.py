@@ -12,12 +12,11 @@ dotenv.load_dotenv()
 SessionLocal = sessionmaker(bind=engine)
 session = SessionLocal()
 
-
 def fetch_datalogs(
     analysis_date: str = datetime.now().strftime("%d-%m-%Y"),
 ) -> pd.DataFrame:
+    dt = datetime.strptime(analysis_date, "%d-%m-%Y")
     print("Fetching data for date:", analysis_date)
-    analysis_date = datetime.strptime(analysis_date, "%d-%m-%Y")
 
     query = f"""
         -- sql
@@ -35,14 +34,13 @@ def fetch_datalogs(
             cast(datalog.latitude as float) as latitude,
             cast(datalog.longitude as float) as longitude,
             datalog.created_at as created_at,
-            datalog.updated_at as updated_at,
-            datalog.is_outlier as is_outlier
+            datalog.updated_at as updated_at
         FROM t_wc_datalog datalog
         LEFT JOIN t_wc_animals_collars animal_collars ON datalog.id_animal_collar = animal_collars.id_animal_collar
         LEFT JOIN t_wc_animals animals ON animal_collars.id_animal = animals.id_animal
         LEFT JOIN t_wc_species species ON animals.id_species = species.id_species
         LEFT JOIN t_wc_breeds breeds ON animals.id_breed = breeds.id_breed
-        WHERE cast(datalog.created_at as Date) = '{analysis_date}'
+        WHERE cast(datalog.created_at as Date) = '{dt.strftime("%Y-%m-%d")}'
     """
 
     result = session.execute(text(query)).fetchall()
@@ -64,7 +62,6 @@ def fetch_datalogs(
             "longitude",
             "created_at",
             "updated_at",
-            "is_outlier",
         ],
     )
 

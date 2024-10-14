@@ -1,4 +1,7 @@
 # Relatório de Saúde Animal: {{ date }}
+{% if species_list|length == 0 %}
+Nenhum dado por espécie encontrado.
+{% else %}
 {% for species in species_list %}
 ## Espécie: {{ species.name }}
 
@@ -12,3 +15,4 @@
     - **Deslocamento Máximo:** {{ species.max_distance }} km
     - **Deslocamento Mínimo:** {{ species.min_distance }} km
 {% endfor %}
+{% endif %}

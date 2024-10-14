@@ -1,0 +1,16 @@
+{
+    "simulation": {
+        "animalNumber": 2,
+        "interval": 5,
+        "iterations": 50
+    },
+    "report": {
+        "outDir": "./reports/",
+        "templatePath": "./config/template.jinja2.md"
+    },
+    "alerts": {
+        "temperature_outlier_z_threshold": 3.2,
+        "hearth_rate_outlier_z_threshold": 6.0,
+        "movement_outlier_z_threshold": 1.7
+    }
+}
