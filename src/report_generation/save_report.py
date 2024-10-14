@@ -1,6 +1,6 @@
 from pathlib import Path
 from jinja2 import Template
-from typings import ReportData
+from typings import ReportData, AlertData
 from config import reportOutDir, templatePath
 from typing import List
 
@@ -17,6 +17,10 @@ def save_report(date: str, data: List[ReportData]):
     """
     filename = f"daily_report_{date.replace('-', '')}.md"
     filepath = Path(reportOutDir) / filename
+
+    if not Path(templatePath).exists():
+        print(f"ERROR: Template file not found at {templatePath}")
+        exit(1)
 
     with open(templatePath) as file_:
         template = Template(file_.read())

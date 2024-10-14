@@ -5,6 +5,7 @@ from datetime import datetime
 from db import engine
 from db_utils import fetch_datalogs
 from typings import ReportData
+from typings import AlertData
 
 dotenv.load_dotenv()
 
@@ -60,11 +61,44 @@ def analyze_data(analysis_date: str = datetime.now().strftime("%d-%m-%Y")):
 
     return data
 
-def dataPerSpecies(data):
+def data_per_species(data, alerts_data):
     reportData = []
 
     for species, species_data in data.items():
+
         for breed, breed_data in species_data.items():
-            reportData.append(ReportData(species, breed, breed_data['count'], breed_data['mean_temperature'], breed_data['max_temperature'], breed_data['min_temperature'], breed_data['total_distance_traveled_meters'], breed_data['mean_distance_traveled_meters'], breed_data['max_distance_traveled_meters'], breed_data['min_distance_traveled_meters']))
+            alerts_data = alerts_data[species][breed]
+            item = ReportData(
+                species,
+                breed,
+                breed_data['count'],
+                breed_data['mean_temperature'],
+                breed_data['max_temperature'],
+                breed_data['min_temperature'],
+                breed_data['total_distance_traveled_meters'],
+                breed_data['mean_distance_traveled_meters'],
+                breed_data['max_distance_traveled_meters'],
+                breed_data['min_distance_traveled_meters'],
+                alerts_data
+            )
+
+            reportData.append(item)
 
     return reportData
+
+def alerts_count_to_alerts_data(alerts_count):
+    alerts_data = {}
+
+    for species, breeds in alerts_count.items():
+        alerts_data[species] = {}
+        for breed, alerts in breeds.items():
+            alerts_data[species][breed] = AlertData(
+                animals_with_high_temperature=alerts.get("temperature", {}).get("z_score_outlier_above", 0),
+                animals_with_low_temperature=alerts.get("temperature", {}).get("z_score_outlier_below", 0),
+                animals_with_high_heart_rate=alerts.get("heartrate", {}).get("z_score_outlier_above", 0),
+                animals_with_low_heart_rate=alerts.get("heartrate", {}).get("z_score_outlier_below", 0),
+                animals_with_high_distance=alerts.get("animal_distance_traveled", {}).get("z_score_outlier_above", 0),
+                animals_with_low_distance=alerts.get("animal_distance_traveled", {}).get("z_score_outlier_below", 0),
+            )
+
+    return alerts_data
