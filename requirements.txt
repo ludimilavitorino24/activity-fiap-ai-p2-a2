@@ -1,4 +1,6 @@
 greenlet==3.1.1
+Jinja2==3.1.4
+MarkupSafe==3.0.1
 numpy==2.1.1
 pandas==2.2.3
 perlin-noise==1.13
@@ -10,4 +12,3 @@ six==1.16.0
 SQLAlchemy==2.0.35
 typing_extensions==4.12.2
 tzdata==2024.2
-oracledb==2.4.1
