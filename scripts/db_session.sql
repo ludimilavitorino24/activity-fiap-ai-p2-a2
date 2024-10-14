@@ -11,3 +11,9 @@ BEGIN
         EXECUTE 'DROP TABLE IF EXISTS ' || quote_ident(r.tablename) || ' CASCADE'; 
     END LOOP; 
 END $$;
+
+-- @block Show DataLog data
+SELECT * FROM t_wc_datalog;
+
+-- @block Delete all DataLog data
+DELETE FROM t_wc_datalog;

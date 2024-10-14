@@ -1,0 +1,26 @@
+{
+    "simulation": {
+        "animalNumber": 30,
+        "interval": 5,
+        "iterations": 100,
+        "outlier": {
+            "fever_trigger_pct": 0.083,
+            "hypothermia_trigger_pct": 0.083,
+            "min_temp": 37.5,
+            "max_temp": 39.3,
+            "tachycardia_trigger_pct": 0.022,
+            "bradycardia_trigger_pct": 0.022,
+            "min_heartrate": 60,
+            "max_heartrate": 80
+        }
+    },
+    "report": {
+        "outDir": "./reports/",
+        "templatePath": "./config/template.jinja2.md"
+    },
+    "alerts": {
+        "temp_outlier_z_threshold": 3.5,
+        "heartrate_outlier_z_threshold": 5.5,
+        "movement_outlier_z_threshold": 1.75
+    }
+}

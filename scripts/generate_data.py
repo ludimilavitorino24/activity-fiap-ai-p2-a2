@@ -14,6 +14,8 @@ import random
 from data_simulation.animal_names import cow_names_pt_br
 
 def populate_db():
+    print("INFO: Generating data")
+
     try:
         SessionLocal = sessionmaker(bind=engine)
         session = SessionLocal()
@@ -24,12 +26,12 @@ def populate_db():
             name="Cow"
         )
         session.add(new_species)
-        session.commit()
 
         new_breed = Breed(
             name="Holstein"
         )
         session.add(new_breed)
+
         session.commit()
 
         #endregion
@@ -37,7 +39,7 @@ def populate_db():
         for i in range(animalNumber):
             animal_name = random.choice(cow_names_pt_br)
             new_animal = Animal(
-                tag_id=1,
+                tag_id=i,
                 name=animal_name + " " + str(i + 1),
                 id_species=new_species.id_species,
                 id_breed=new_breed.id_breed
@@ -66,19 +68,15 @@ def populate_db():
                 intervalInSecs = (interval * 60) * j
                 startingTime += intervalInSecs
 
-                dt_object = datetime.fromtimestamp(startingTime)
-                formatted_time = dt_object.strftime('%Y-%m-%d %H:%M:%S')
-
                 new_datalog = DataLog(
                     id_animal_collar=new_animal_collar.id_animal_collar,
                     temperature=temp,
                     heartrate=heartrate,
                     latitude=lat,
                     longitude=lon,
-                    created_at=formatted_time
+                    created_at=datetime.fromtimestamp(startingTime)
                 )
                 session.add(new_datalog)
-                session.commit()
 
         print("Farm populated successfully with:")
         print("1 species,")
@@ -88,10 +86,12 @@ def populate_db():
         print(f"{animalNumber} animal-collar links.")
         print(f"{animalNumber * iterations} data logs.")
         
+        
     except Exception as e:
         session.rollback()
         print(f"Error: {e}")
     finally:
+        session.commit()
         session.close()
 
 if __name__ == "__main__":
