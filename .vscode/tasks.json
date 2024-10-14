@@ -1,0 +1,65 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Watchcows: Generate Data",
+            "type": "shell",
+            "command": "python3 scripts/generate-data.py",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Generate simulated data and save it to the database"
+        },
+        {
+            "label": "Watchcows: Generate Report",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "scripts/generate-report.py",
+                "${input:dateArg}"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Save the report to the reports folder"
+        },
+        {
+            "label": "Watchcows: Generate Alerts",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "scripts/generate-alerts.py",
+                "${input:dateArg}"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Generate alerts based on the datalogs"
+        },
+        {
+            "label": "Watchcows: Clear database",
+            "type": "shell",
+            "command": "python3 scripts/clear-database.py",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Clear all table data"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "dateArg", // The input ID used in the task
+            "type": "promptString",
+            "description": "Enter the date (DD-MM-YYYY). Let it empty for today",
+            "default": "13-10-2024"
+        }
+    ],
+}
