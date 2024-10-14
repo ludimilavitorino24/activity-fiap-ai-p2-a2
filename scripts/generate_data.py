@@ -14,6 +14,8 @@ import random
 from data_simulation.animal_names import cow_names_pt_br
 
 def populate_db():
+    print("INFO: Generating data")
+
     try:
         SessionLocal = sessionmaker(bind=engine)
         session = SessionLocal()

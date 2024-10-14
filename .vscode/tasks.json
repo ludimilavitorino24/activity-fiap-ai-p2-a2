@@ -2,6 +2,17 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Watchcows: Run Demo",
+            "type": "shell",
+            "command": "python3 scripts/demo.py",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Execute all the scripts needed to run the demo"
+        },
+        {
             "label": "Watchcows: Generate Data",
             "type": "shell",
             "command": "python3 scripts/generate-data.py",
@@ -26,21 +37,6 @@
                 "isDefault": true
             },
             "detail": "Save the report to the reports folder"
-        },
-        {
-            "label": "Watchcows: Generate Alerts",
-            "type": "shell",
-            "command": "python3",
-            "args": [
-                "scripts/generate-alerts.py",
-                "${input:dateArg}"
-            ],
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "Generate alerts based on the datalogs"
         },
         {
             "label": "Watchcows: Clear database",

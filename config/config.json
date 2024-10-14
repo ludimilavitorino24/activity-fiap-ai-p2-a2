@@ -19,8 +19,8 @@
         "templatePath": "./config/template.jinja2.md"
     },
     "alerts": {
-        "temperature_outlier_z_threshold": 1.5,
-        "hearth_rate_outlier_z_threshold": 1.5,
-        "movement_outlier_z_threshold": 1.5
+        "temp_outlier_z_threshold": 3.5,
+        "heartrate_outlier_z_threshold": 5.5,
+        "movement_outlier_z_threshold": 1.75
     }
 }

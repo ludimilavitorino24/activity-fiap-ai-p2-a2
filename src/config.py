@@ -4,29 +4,29 @@ import json
 
 DEFAULT_CONFIG = {
     "simulation": {
-        "animalNumber": 2,
+        "animalNumber": 30,
         "interval": 5,
-        "iterations": 4
+        "iterations": 100,
+        "outlier": {
+            "fever_trigger_pct": 0.083,
+            "hypothermia_trigger_pct": 0.083,
+            "min_temp": 37.5,
+            "max_temp": 39.3,
+            "tachycardia_trigger_pct": 0.022,
+            "bradycardia_trigger_pct": 0.022,
+            "min_heartrate": 60,
+            "max_heartrate": 80
+        }
     },
     "report": {
         "outDir": "./reports/",
         "templatePath": "./config/template.jinja2.md"
     },
-    "outlier": {
-        "fever_trigger_pct": 0.083,
-        "hypothermia_trigger_pct": 0.083,
-        "min_temp": 37.5,
-        "max_temp": 39.3,
-        "tachycardia_trigger_pct": 0.022,
-        "bradycardia_trigger_pct": 0.022,
-        "min_heartrate": 60,
-        "max_heartrate": 80
-    },
     "alerts": {
-        "temperature_outlier_z_threshold": 3.2,
-        "hearth_rate_outlier_z_threshold": 6.0,
-        "movement_outlier_z_threshold": 1.7,
-    },
+        "temp_outlier_z_threshold": 3.5,
+        "heartrate_outlier_z_threshold": 5.5,
+        "movement_outlier_z_threshold": 1.75
+    }
 }
 
 def saveDefaultConfig():
@@ -66,13 +66,13 @@ bradycardia_trigger_pct = config.get('simulation', {}).get('outlier', {}).get('b
 min_heartrate = config.get('simulation', {}).get('outlier', {}).get('min_heartrate', 60)
 max_heartrate = config.get('simulation', {}).get('outlier', {}).get('max_heartrate', 80)
 
-temperature_outlier_z_threshold = config.get("alerts", {}).get(
-    "temperature_outlier_z_threshold",
-    DEFAULT_CONFIG["alerts"]["temperature_outlier_z_threshold"],
+temp_outlier_z_threshold = config.get("alerts", {}).get(
+    "temp_outlier_z_threshold",
+    DEFAULT_CONFIG["alerts"]["temp_outlier_z_threshold"],
 )
-hearth_rate_outlier_z_threshold = config.get("alerts", {}).get(
-    "hearth_rate_outlier_z_threshold",
-    DEFAULT_CONFIG["alerts"]["hearth_rate_outlier_z_threshold"],
+heartrate_outlier_z_threshold = config.get("alerts", {}).get(
+    "heartrate_outlier_z_threshold",
+    DEFAULT_CONFIG["alerts"]["heartrate_outlier_z_threshold"],
 )
 movement_outlier_z_threshold = config.get("alerts", {}).get(
     "movement_outlier_z_threshold",

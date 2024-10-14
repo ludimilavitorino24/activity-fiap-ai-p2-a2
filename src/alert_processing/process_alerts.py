@@ -1,12 +1,11 @@
 import pandas as pd
-import numpy as np
 
-from alert_processing.fetch_data import fetch_data
 from alert_processing.save_alert import save_alert
+from db_utils import fetch_datalogs
 
 from config import (
-    temperature_outlier_z_threshold,
-    hearth_rate_outlier_z_threshold,
+    temp_outlier_z_threshold,
+    heartrate_outlier_z_threshold,
     movement_outlier_z_threshold,
 )
 
@@ -58,10 +57,10 @@ def process_outliers(data, field_name: str, threshold: float):
 
 
 def process_alerts(day: str):
-    data = fetch_data(day)
+    data = fetch_datalogs(day)
 
     temperature_alerts = process_outliers(
-        data, "temperature", threshold=temperature_outlier_z_threshold
+        data, "temperature", threshold=temp_outlier_z_threshold
     )
     print(f"Alertas de temperatura disparados: {len(temperature_alerts)}")
 
@@ -69,7 +68,7 @@ def process_alerts(day: str):
         save_alert(**alert)
 
     heart_rate_alerts = process_outliers(
-        data, "heartrate", threshold=hearth_rate_outlier_z_threshold
+        data, "heartrate", threshold=heartrate_outlier_z_threshold
     )
     print(f"Alertas de batimentos cardíacos disparados: {len(heart_rate_alerts)}")
 

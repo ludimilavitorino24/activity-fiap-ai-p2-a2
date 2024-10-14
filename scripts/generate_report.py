@@ -6,7 +6,9 @@ from db import engine, DataLog
 from sqlalchemy.orm import sessionmaker
 from report_generation.save_report import save_report
 from datetime import datetime
-from report_generation.analyze_data import analyze_data, dataPerSpecies
+from report_generation.analyze_data import analyze_data, data_per_species, alerts_count_to_alerts_data
+from alert_processing.process_alerts import process_alerts
+from db_utils import generate_alerts_counts
 
 # default to today
 date = datetime.now().strftime("%d-%m-%Y")
@@ -16,11 +18,17 @@ if len(sys.argv) > 1:
     date = sys.argv[1]
 
 def generate_report():
-    print(f"Generating report for {date}")
+    print("INFO: Generating report")
 
+    print(f"Analysing report data for {date}")
     data = analyze_data(date)
-    reportData = dataPerSpecies(data)
+
+    print(f"Generating alerts for {date}")
+    process_alerts(date)
+    alerts_count = generate_alerts_counts(date)
+    alerts_data = alerts_count_to_alerts_data(alerts_count)
     
+    reportData = data_per_species(data, alerts_data)
     save_report(date, reportData)
 
 def data_exists():

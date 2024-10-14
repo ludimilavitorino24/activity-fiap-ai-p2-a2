@@ -5,6 +5,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src'
 from db import engine, DataLog, Species, Breed, Animal, Collar, AnimalCollar, Alert
 from sqlalchemy.orm import sessionmaker
 
+print("INFO: Cleaning database")
+
 Session = sessionmaker(bind=engine)
 session = Session()
 
