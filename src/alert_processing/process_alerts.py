@@ -84,3 +84,5 @@ def process_alerts(day: str):
 
     for alert in movement_alerts:
         save_alert(**alert)
+
+    return data, temperature_alerts, heart_rate_alerts, movement_alerts

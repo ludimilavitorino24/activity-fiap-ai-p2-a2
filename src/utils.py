@@ -1,5 +1,7 @@
 import math
 
+def map_range(value, start1, stop1, start2, stop2):
+    return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1))
 
 def calculate_distance_meters(lat1: float, lon1: float, lat2: float, lon2: float):
     """

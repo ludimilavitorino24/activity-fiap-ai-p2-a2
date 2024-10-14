@@ -2,7 +2,7 @@
     "simulation": {
         "animalNumber": 2,
         "interval": 5,
-        "iterations": 4
+        "iterations": 50
     },
     "report": {
         "outDir": "./reports/",

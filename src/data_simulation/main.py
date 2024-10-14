@@ -1,5 +1,6 @@
 from perlin_noise import PerlinNoise
 import random
+from utils import map_range
 
 print("Module loaded: data_simulation.main")
 
@@ -29,9 +30,6 @@ def next_heartrate(i):
     bpm = round(heartrate)
     return round(bpm, 2)
 
-def map_range(value, start1, stop1, start2, stop2):
-    return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1))
-
 def next_geo2d(i, interval):
     d = map_range(interval, 5, 10, 10_000_000, 1_000_000)
 
@@ -42,4 +40,3 @@ def next_geo2d(i, interval):
     lon = round(lon, 4)
 
     return lat, lon
-
