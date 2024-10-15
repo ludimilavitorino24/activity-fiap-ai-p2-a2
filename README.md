@@ -28,7 +28,10 @@
 
 **Watch Cows** é uma empresa que ajuda pecuaristas a monitorarem eletronicamente a saúde de seus rebanhos. Através da detecção de parâmetros (temperatura, frequência cardíaca e movimento) coletados por coleiras, o sistema realiza análises, gera alertas em tempo real e produz relatórios sobre a saúde do rebanho.
 
-Para mais informações, acesse o [documento do projeto](./document/other/project_structure.md).
+Para mais informações, acesse:
+- [Documentação do projeto](./document/ai_project_document_fiap.md)
+- [Documento da estrutura do projeto](./document/other/project_structure.md)
+- [Documento de explicação do algoritmo](./document/other/the_z_score_outlier_detection_algorithm.md)
 
 ## 📁 Estrutura de pastas
 
@@ -37,16 +40,26 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 ```
 Projeto Watch Cows
 .
-├── .gitignore                       # Arquivo de configuração do Git para ignorar arquivos e diretórios
-├── .gitattributes                    # Arquivo de configuração do Git para manipulação de arquivos
 ├── assets
 │   └── logo-fiap.png                # Logotipo da FIAP usado na documentação ou interface
 ├── config
 │   ├── config.json                  # Arquivo de configuração principal da aplicação
 │   └── template.jinja2.md           # Template para geração de relatórios
-├── document
+├── docker-compose.yml               # Arquivo de configuração do Docker Compose
+├── document                         # Documentos do projeto
 │   └── ai_project_document_fiap.md  # Documento principal do projeto AI para FIAP
+│   └── other                        # Documentos adicionais do projeto
+│       ├── project_structure.md     # Documento de explicação da estrutura do projeto
+│       └── the_z_score_outlier_detection_algorithm.md      # Documento de explicação do algoritmo Z-Score
+├── .env                             # Arquivo de configuração de variáveis de ambiente
+├── .env.example                     # Arquivo de exemplo de configuração de variáveis de ambiente
+├── .gitattributes                   # Arquivo de configuração do Git para manipulação de arquivos
+├── .github                          # Diretório de configuração do GitHub
+│   └── problem-report.md            # Modelo de relatório de problemas
+├── .gitignore                       # Arquivo de configuração do Git para ignorar arquivos e diretórios
 ├── README.md                        # Documentação principal do projeto
+├── reports                          # Diretório de relatórios gerados pela aplicação
+│   └── daily_report_14102024.md     # Exemplo de relatório diário gerado pela aplicação
 ├── requirements.txt                 # Lista de dependências Python do projeto
 ├── scripts                          # Diretório contendo scripts utilitários e de automação
 │   ├── clear_database.py            # Script para limpar o banco de dados
@@ -71,6 +84,10 @@ Projeto Watch Cows
     │   └── save_report.py           # Salva os relatórios gerados no sistema
     ├── typings.py                   # Definições de tipos usados no código
     └── utils.py                     # Funções utilitárias diversas
+└── .vscode                          # Diretório de configuração do Visual Studio Code
+    ├── launch.json                  # Configuração de execução do VSCode
+    ├── settings.json                # Configuração de preferências do VSCode
+    └── tasks.json                   # Configuração de tarefas do VSCode
 ```
 
 ## 🔧 Como executar o código
