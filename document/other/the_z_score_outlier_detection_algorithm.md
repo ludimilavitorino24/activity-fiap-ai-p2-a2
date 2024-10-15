@@ -56,7 +56,3 @@ print("Outliers detectados:", outliers)
 
 - **Limiar ajustável**: O valor `3` é uma convenção comum, mas pode ser ajustado conforme a distribuição dos dados ou a aplicação.
 - **Distribuição normal dos dados**: O Z-Score é mais eficaz quando os dados seguem uma distribuição aproximadamente normal (gaussiana).
-
----
-
-Este formato garante que as fórmulas fiquem legíveis em um `README.md` no GitHub, que não suporta a renderização direta de fórmulas matemáticas como Latex.
