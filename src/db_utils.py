@@ -18,6 +18,8 @@ def fetch_datalogs(
     dt = datetime.strptime(analysis_date, "%d-%m-%Y")
     print("Fetching data for date:", analysis_date)
 
+    queryDt = dt.strftime("%Y-%m-%d")
+
     query = f"""
         -- sql
         SELECT 
@@ -40,7 +42,7 @@ def fetch_datalogs(
         LEFT JOIN t_wc_animals animals ON animal_collars.id_animal = animals.id_animal
         LEFT JOIN t_wc_species species ON animals.id_species = species.id_species
         LEFT JOIN t_wc_breeds breeds ON animals.id_breed = breeds.id_breed
-        WHERE cast(datalog.created_at as Date) = '{dt.strftime("%Y-%m-%d")}'
+        WHERE datalog.created_at >= TO_DATE('{queryDt}','YYYY-MM-DD') AND datalog.created_at < TO_DATE('{queryDt}','YYYY-MM-DD') + INTERVAL '1' DAY
     """
 
     result = session.execute(text(query)).fetchall()
@@ -100,25 +102,14 @@ def fetch_datalogs(
 
     return df
 
-# t_wc_alerts table
-# class Alert(Base):
-#     __tablename__ = 't_wc_alerts'
-
-#     id_alert = Column(Integer, primary_key=True, autoincrement=True)
-#     id_datalog = Column(Integer, ForeignKey(f'{SCHEMA}.t_wc_datalog.id_datalog'), nullable=False)
-#     alert_metric = Column(String(50), nullable=False)  # e.g., 'temperature', 'heartrate', 'movement'
-#     alert_type = Column(String(50), nullable=False)  # e.g. 'z_score_outlier_above', 'z_score_outlier_below'
-#     created_at = Column(TIMESTAMP, nullable=False, server_default=func.now())
-
-#     datalog = relationship('DataLog')
-    
-#     __str__ = lambda self: f'Alert {self.alert_type} for Animal Collar {self.id_animal_collar}'
 
 def fetch_alerts(
     analysis_date: str = datetime.now().strftime("%d-%m-%Y")
 ) -> pd.DataFrame:
     dt = datetime.strptime(analysis_date, "%d-%m-%Y")
     print("Fetching alerts for date:", analysis_date)
+
+    queryDt = dt.strftime("%Y-%m-%d")
 
     query = f"""
         -- sql
@@ -145,7 +136,7 @@ def fetch_alerts(
         LEFT JOIN t_wc_animals animals ON animal_collars.id_animal = animals.id_animal
         LEFT JOIN t_wc_species species ON animals.id_species = species.id_species
         LEFT JOIN t_wc_breeds breeds ON animals.id_breed = breeds.id_breed
-        WHERE cast(alerts.created_at as Date) = '{dt.strftime("%Y-%m-%d")}'
+        WHERE datalog.created_at >= TO_DATE('{queryDt}','YYYY-MM-DD') AND datalog.created_at < TO_DATE('{queryDt}','YYYY-MM-DD') + INTERVAL '1' DAY
     """
 
     result = session.execute(text(query)).fetchall()

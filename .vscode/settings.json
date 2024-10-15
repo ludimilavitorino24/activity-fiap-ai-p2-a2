@@ -1,4 +1,15 @@
 {
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/pgdata/": true,
+        ".venv": true,
+    },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+        ".env.example": ".env*",
+        "docker-compose.yml": ".git*, requirements.txt",
+    },
     "sqltools.connections": [
         {
             "previewLimit": 50,

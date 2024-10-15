@@ -117,8 +117,9 @@ class DataLog(Base):
 # t_wc_alerts table
 class Alert(Base):
     __tablename__ = 't_wc_alerts'
+    __table_args__ = {'schema': SCHEMA }
 
-    id_alert = Column(Integer, primary_key=True, autoincrement=True)
+    id_alert = Column(Integer, Identity(start=1), primary_key=True, autoincrement=True)
     id_datalog = Column(Integer, ForeignKey(f'{SCHEMA}.t_wc_datalog.id_datalog'), nullable=False)
     alert_metric = Column(String(50), nullable=False)  # e.g., 'temperature', 'heartrate', 'movement'
     alert_type = Column(String(50), nullable=False)  # e.g. 'z_score_outlier_above', 'z_score_outlier_below'

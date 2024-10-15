@@ -15,7 +15,7 @@
         {
             "label": "Watchcows: Generate Data",
             "type": "shell",
-            "command": "python3 scripts/generate-data.py",
+            "command": "python3 scripts/generate_data.py",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -28,7 +28,7 @@
             "type": "shell",
             "command": "python3",
             "args": [
-                "scripts/generate-report.py",
+                "scripts/generate_report.py",
                 "${input:dateArg}"
             ],
             "problemMatcher": [],
@@ -41,7 +41,7 @@
         {
             "label": "Watchcows: Clear database",
             "type": "shell",
-            "command": "python3 scripts/clear-database.py",
+            "command": "python3 scripts/clear_database.py",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

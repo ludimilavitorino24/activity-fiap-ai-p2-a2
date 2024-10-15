@@ -24,6 +24,10 @@ def save_alert(
         if existing_alert:
             return
 
+        print("---")
+        print(id_datalog, alert_metric, alert_type)
+        print("---")
+
         new_alert = Alert(
             id_datalog=id_datalog,
             alert_type=alert_type,
