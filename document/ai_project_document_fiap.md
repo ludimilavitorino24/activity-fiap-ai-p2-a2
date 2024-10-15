@@ -27,8 +27,6 @@
 
 [6. Referências](#c6)
 
-[Anexos](#c7)
-
 <br>
 
 # <a name="c1"></a>1. Introdução
@@ -55,8 +53,6 @@ O público-alvo do projeto são pecuaristas e fazendeiros que buscam melhorar a 
 
 ## 2.3. Metodologia
 
-*Descreva a metodologia utilizada para desenvolver o projeto. Quais foram as etapas e processos seguidos?*
-
 A metodologia utilizada no desenvolvimento do projeto foi baseada em microsserviços, cada um responsável por uma funcionalidade específica: simulação de dados, processamento de alertas e geração de relatórios. O ciclo de desenvolvimento envolveu as seguintes etapas:
 
 1. **Definição de Requisitos**: Identificação das métricas de saúde animal que seriam monitoradas (temperatura, frequência cardíaca e movimento).
@@ -70,7 +66,6 @@ A metodologia utilizada no desenvolvimento do projeto foi baseada em microsservi
 
 As tecnologias utilizadas no desenvolvimento do projeto "Watchcows" foram:
 
-- **Docker:** Plataforma de containerização que facilita a criação e o gerenciamento de ambientes de desenvolvimento.
 - **jinja2:**  Biblioteca Python para renderização de templates, utilizada para a geração de relatórios.
 - **numpy:** Biblioteca Python para computação científica, utilizada para o processamento de dados.
 - **oracledb:** Conector Python para o banco de dados Oracle, utilizado para interação com o banco de dados.
@@ -91,8 +86,6 @@ As tecnologias utilizadas no desenvolvimento do projeto "Watchcows" foram:
 
 ## 3.2. Modelagem e Algoritmos
 
-*Descreva os modelos e algoritmos de IA utilizados no projeto. Explique por que esses modelos foram escolhidos e como foram implementados.*
-
 No projeto Watch Cows, a modelagem e os algoritmos de IA utilizados são centrados na detecção de anomalias nos dados de saúde dos animais. Para isso, foram implementados algoritmos baseados na detecção de outliers, utilizando o cálculo de z-score. Essa abordagem foi escolhida devido à sua eficácia em identificar valores discrepantes em conjuntos de dados, que é fundamental para alertar os pecuaristas sobre possíveis problemas de saúde nos rebanhos. [Clique aqui para explicações detalhadas sobre o algorítmo z-score para detecção de outliers.](./other/the_z_score_outlier_detection_algorithm.md)
 
 O algoritmo avalia medições de temperatura, frequência cardíaca e movimento, comparando cada valor observado com a média e o desvio padrão dos dados históricos. Se um valor cai fora de um intervalo de confiança pré-definido (configurado no arquivo de configuração `config.py`), um alerta é gerado. Essa estratégia é eficiente, pois não requer um treinamento extenso de modelos de machine learning, mas sim uma análise estatística direta dos dados.
@@ -107,15 +100,12 @@ O processo de validação dos algoritmos no projeto foi realizado de maneira ite
 
 Os conjuntos de dados foram gerados artificialmente para simular diversas situações, incluindo tanto dados normais quanto anômalos. Essa abordagem garantiu uma diversidade de cenários para testar a eficácia dos alertas gerados. Os dados foram organizados em um banco de dados e utilizados para avaliar as funcionalidades dos algoritmos.
 
-### Resultados Obtidos
-
-Os testes demonstraram que o sistema foi capaz de identificar a maioria das anomalias corretamente. Os alertas gerados permitem que os pecuaristas recebam informações relevantes e oportunas sobre a saúde de seus rebanhos, possibilitando intervenções rápidas e informadas. Esses resultados indicam que a abordagem estatística implementada é eficaz para o monitoramento da saúde animal, atendendo às necessidades do setor pecuário.
 
 # <a name="c4"></a>4. Resultados e Avaliações
 
 ## 4.1. Análise dos Resultados
 
-*Analise os resultados obtidos com os modelos de IA. Compare os resultados esperados com os resultados reais e discuta as possíveis razões para as diferenças.*
+Os testes demonstraram que o sistema foi capaz de identificar a maioria das anomalias corretamente. Os alertas gerados permitem que os pecuaristas recebam informações relevantes e oportunas sobre a saúde de seus rebanhos, possibilitando intervenções rápidas e informadas. Esses resultados indicam que a abordagem estatística implementada é eficaz para o monitoramento da saúde animal, atendendo às necessidades do setor pecuário.
 
 ## 4.2. Feedback dos Usuários
 
@@ -139,23 +129,4 @@ O projeto "Watch Cows" demonstra o potencial da tecnologia para auxiliar na gest
 
 # <a name="c6"></a>6. Referências
 
-_Incluir as principais referências de seu projeto, para que outros possam consultar caso tenham interesse em aprofundar._
 - https://en.wikipedia.org/wiki/Perlin_noise
-
-# <a name="c7"></a>Anexos
-
-*Inclua aqui quaisquer complementos para seu projeto, como diagramas, imagens, tabelas etc. Organize em sub-tópicos utilizando headings menores (use ## ou ### para isso).*
-
-## 7.1. Diagrama de Arquitetura do Sistema
-
-<img src="../assets/arquitetura-sistema.png" alt="Diagrama de Arquitetura do Sistema" border="0" width=80% height=80%>
-
-## 7.2. Exemplo de Relatório de Saúde Animal
-
-<img src="../assets/relatorio-exemplo.png" alt="Exemplo de Relatório de Saúde Animal" border="0" width=80% height=80%>
-
-## 7.3. Códigos de Exemplo
-
-- **Simulação de Dados:** scripts/generate_data.py
-- **Processamento de Alertas:** src/alert_processing/process_alerts.py
-- **Geração de Relatórios:** src/report_generation/save_report.py
