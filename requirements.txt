@@ -1,10 +1,14 @@
+cffi==1.17.1
+cryptography==43.0.1
 greenlet==3.1.1
 Jinja2==3.1.4
 MarkupSafe==3.0.1
 numpy==2.1.1
+oracledb==2.4.1
 pandas==2.2.3
 perlin-noise==1.13
 psycopg2-binary==2.9.9
+pycparser==2.22
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 pytz==2024.2

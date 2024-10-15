@@ -67,7 +67,7 @@ def data_per_species(data, alerts_data):
     for species, species_data in data.items():
 
         for breed, breed_data in species_data.items():
-            alerts_data = alerts_data[species][breed]
+            alerts_item = alerts_data[species][breed]
             item = ReportData(
                 species,
                 breed,
@@ -79,7 +79,7 @@ def data_per_species(data, alerts_data):
                 breed_data['mean_distance_traveled_meters'],
                 breed_data['max_distance_traveled_meters'],
                 breed_data['min_distance_traveled_meters'],
-                alerts_data
+                alerts_data=alerts_item
             )
 
             reportData.append(item)
