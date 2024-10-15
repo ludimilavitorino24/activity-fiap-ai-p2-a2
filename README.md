@@ -37,6 +37,8 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 ```
 Projeto Watch Cows
 .
+├── .gitignore                       # Arquivo de configuração do Git para ignorar arquivos e diretórios
+├── .gitattributes                    # Arquivo de configuração do Git para manipulação de arquivos
 ├── assets
 │   └── logo-fiap.png                # Logotipo da FIAP usado na documentação ou interface
 ├── config
